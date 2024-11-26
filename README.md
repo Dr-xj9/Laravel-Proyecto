@@ -21,6 +21,14 @@ llevandonos de nuevo al inicio.
 ![image](https://github.com/user-attachments/assets/b892b582-cdf5-4bf7-83e5-28a70a007592)
 Al borrar uno lo mismo sucede con un mensaje diferente.
 
+![image](https://github.com/user-attachments/assets/df976840-9048-4226-ab0c-87ee34d025e3)
+Al presionar editar podemos modificar datos
+
+![image](https://github.com/user-attachments/assets/d59ecb8c-94e2-430b-898a-c6719354dd56)
+![image](https://github.com/user-attachments/assets/486eccdf-1793-456b-95ad-39610864876c)
+Con un mensaje de sweetalert
+
+
 
 
 
