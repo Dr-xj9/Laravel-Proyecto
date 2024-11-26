@@ -34,22 +34,39 @@ class ContactController extends Controller
         return view('contacts.show', compact('contact'));
     }
 
-    public function edit(Contact $contact)
+   // Mostrar el formulario para editar un contacto
+    public function edit($id)
     {
+        $contact = Contact::findOrFail($id);
         return view('contacts.edit', compact('contact'));
     }
 
-    public function update(Request $request, Contact $contact)
+    // Actualizar un contacto
+    public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
-        ]);
+    // Validar los datos del formulario
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'phone' => 'required|string|max:15',
+        'address' => 'nullable|string|max:255',
+    ]);
 
-        $contact->update($validated);
-        return redirect()->route('contacts.index');
+    // Buscar el contacto por su ID
+    $contact = Contact::findOrFail($id);
+
+    // Actualizar los datos del contacto
+    $contact->update([
+        'name' => $request->input('name'),
+        'email' => $request->input('email'),
+        'phone' => $request->input('phone'),
+        'address' => $request->input('address'),
+    ]);
+
+    // Redirigir a la lista de contactos con un mensaje de éxito
+    return redirect()->route('contacts.index')->with('success', 'Contacto actualizado exitosamente');
     }
+
 
     public function destroy(Contact $contact)
     {

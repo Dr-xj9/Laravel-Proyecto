@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +7,22 @@
 </head>
 <body>
     <h1>Lista de Contactos</h1>
-    <a href="{{ route('contacts.create') }}">Crear Nuevo Contacto</a>
+
+    @if(session('success'))
+        <div style="color: green;">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <a href="{{ route('contacts.create') }}">Crear nuevo contacto</a>
 
     <ul>
-        @foreach ($contacts as $contact)
+        @foreach($contacts as $contact)
             <li>
-                {{ $contact->name }} - {{ $contact->email }} - {{ $contact->phone }}
-                <a href="{{ route('contacts.show', $contact) }}">Ver</a>
-                <a href="{{ route('contacts.edit', $contact) }}">Editar</a>
-                <form action="{{ route('contacts.destroy', $contact) }}" method="POST" style="display:inline;">
+                <strong>{{ $contact->name }}</strong> - {{ $contact->email }}
+                <a href="{{ route('contacts.show', $contact->id) }}">Ver</a>
+                <a href="{{ route('contacts.edit', $contact->id) }}">Editar</a>
+                <form action="{{ route('contacts.destroy', $contact->id) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit">Eliminar</button>
@@ -23,8 +30,5 @@
             </li>
         @endforeach
     </ul>
-    <?php
-        echo env('APP_URL');
-    ?>
 </body>
 </html>

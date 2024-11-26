@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle del Contacto</title>
+    <title>Ver Contacto</title>
 </head>
 <body>
-    <h1>Detalle del Contacto</h1>
+    <h1>Detalles del Contacto</h1>
+
     <p><strong>Nombre:</strong> {{ $contact->name }}</p>
-    <p><strong>Email:</strong> {{ $contact->email }}</p>
+    <p><strong>Correo Electrónico:</strong> {{ $contact->email }}</p>
     <p><strong>Teléfono:</strong> {{ $contact->phone }}</p>
+    <p><strong>Dirección:</strong> {{ $contact->address ?? 'No disponible' }}</p>
+
+    <br>
     <a href="{{ route('contacts.index') }}">Volver a la lista</a>
 </body>
 </html>
