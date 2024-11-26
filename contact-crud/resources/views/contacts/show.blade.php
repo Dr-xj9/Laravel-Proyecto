@@ -6,14 +6,36 @@
     <title>Ver Contacto</title>
 </head>
 <body>
-    <h1>Detalles del Contacto</h1>
+@extends('layouts.app')
 
-    <p><strong>Nombre:</strong> {{ $contact->name }}</p>
-    <p><strong>Correo Electrónico:</strong> {{ $contact->email }}</p>
-    <p><strong>Teléfono:</strong> {{ $contact->phone }}</p>
-    <p><strong>Dirección:</strong> {{ $contact->address ?? 'No disponible' }}</p>
+@section('content')
+    <h1 class="mb-4">Detalles del Contacto</h1>
 
-    <br>
-    <a href="{{ route('contacts.index') }}">Volver a la lista</a>
+    <!-- Mostrar detalles del contacto -->
+    <div class="card">
+        <div class="card-header">
+            Información del Contacto
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ $contact->name }}</h5>
+            <p class="card-text"><strong>Correo:</strong> {{ $contact->email }}</p>
+            <p class="card-text"><strong>Teléfono:</strong> {{ $contact->phone }}</p>
+            
+            <!-- Botones de acción -->
+            <div class="d-flex justify-content-between">
+                <a href="{{ route('contacts.edit', $contact->id) }}" class="btn btn-warning">Editar</a>
+                <form action="{{ route('contacts.destroy', $contact->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de volver a la lista de contactos -->
+    <a href="{{ route('contacts.index') }}" class="btn btn-secondary mt-3">Volver a la lista</a>
+@endsection
+
 </body>
 </html>

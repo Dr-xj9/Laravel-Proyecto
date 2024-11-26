@@ -6,27 +6,56 @@
     <title>Crear Contacto</title>
 </head>
 <body>
-    <h1>Crear Nuevo Contacto</h1>
+@extends('layouts.app')
 
-    <form action="{{ route('contacts.store') }}" method="POST">
-        @csrf
+@section('content')
+    <h1 class="mb-4">Crear Nuevo Contacto</h1>
 
-        <label for="name">Nombre:</label>
-        <input type="text" id="name" name="name" required>
-        <br><br>
+    <!-- Formulario de creación de contacto -->
+    <div class="card">
+        <div class="card-header">
+            Ingrese la Información del Nuevo Contacto
+        </div>
+        <div class="card-body">
+            <form action="{{ route('contacts.store') }}" method="POST">
+                @csrf
 
-        <label for="email">Correo Electrónico:</label>
-        <input type="email" id="email" name="email" required>
-        <br><br>
+                <!-- Nombre -->
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre</label>
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
+                    @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
-        <label for="phone">Teléfono:</label>
-        <input type="text" id="phone" name="phone" required>
-        <br><br>
+                <!-- Correo -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo</label>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>
+                    @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
-        <button type="submit">Guardar Contacto</button>
-    </form>
+                <!-- Teléfono -->
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Teléfono</label>
+                    <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone') }}" required>
+                    @error('phone')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
-    <br>
-    <a href="{{ route('contacts.index') }}">Volver a la lista</a>
+                <!-- Botones para guardar o cancelar -->
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">Crear Contacto</button>
+                    <a href="{{ route('contacts.index') }}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection
+
 </body>
 </html>
